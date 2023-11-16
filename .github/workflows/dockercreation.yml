@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CR_PAT: ${{ secrets.PAT_WITH_WRITE_PACKAGES_SCOPE }}
+      CR_PAT: ${{ secrets.DOCKER_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -26,4 +26,4 @@ jobs:
           push: true
           tags: ghcr.io/nimmy-george/app:latest
         env:
-          CR_PAT: ${{ secrets.PAT_WITH_WRITE_PACKAGES_SCOPE }}
+          CR_PAT: ${{ secrets.DOCKER_TOKEN }}
