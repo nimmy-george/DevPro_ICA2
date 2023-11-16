@@ -1,17 +1,23 @@
-name: Docker Build and Push
+name: Build and Push Docker Image
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    services:
-      myservice:
-        image: docker.pkg.github.com/nimmy-george/devpro_ica2/devpro_ica2:latest
-        ports:
-          - 8080:80
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Run Integration Tests
-        run: |
-          # Your integration test command here
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest
+        env:
+          CR_PAT: ${{ secrets.GITHUB_TOKEN }}
