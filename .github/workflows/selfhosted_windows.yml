@@ -1,4 +1,4 @@
-name: Python Unit Tests
+name: Windows-self-hosted
 
 on: [push, pull_request]
 
