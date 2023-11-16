@@ -1,0 +1,21 @@
+name: Unit Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        run: |
+          # Your unit test command here
+
+      - name: Archive Test Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: path/to/test/reports
