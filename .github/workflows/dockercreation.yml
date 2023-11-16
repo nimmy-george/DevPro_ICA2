@@ -18,4 +18,4 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker buildx create --use
-        docker buildx build --platform linux/amd64 -t docker.pkg.github.com/DevPro_ICA2/ICA2Docker:latest --push .
+        docker buildx build --platform linux/amd64 -t docker.pkg.github.com/DevPro_ICA2/ica2docker:latest --push .
