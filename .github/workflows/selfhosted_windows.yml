@@ -26,10 +26,10 @@ jobs:
 
       - name: Run unit tests and generate text report
         run: |
-          "${env:pythonLocation}\python.exe" -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee test-report.txt
+          "${env:pythonLocation}\python.exe" -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee TestReport.txt
 
       - name: Archive test report
         uses: actions/upload-artifact@v2
         with:
           name: test-report
-          path: testreport.txt  # Store the text report as an artifact
+          path: TestReport.txt  
