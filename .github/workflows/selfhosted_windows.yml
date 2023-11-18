@@ -1,4 +1,4 @@
-name: Windows-self-hosted
+name: Python Unit Tests
 
 on: [push, pull_request]
 
@@ -26,10 +26,10 @@ jobs:
 
       - name: Run unit tests and generate text report
         run: |
-          "${env:pythonLocation}\python.exe" -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee TestReport.txt
+          "${env:pythonLocation}\python.exe" -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee Testreport.txt
 
       - name: Archive test report
         uses: actions/upload-artifact@v2
         with:
           name: test-report
-          path: TestReport.txt  
+          path: Testreport.txt  # Store the text report as an artifact
