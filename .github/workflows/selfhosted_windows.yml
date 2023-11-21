@@ -1,16 +1,9 @@
-name: Windows-self-hosted
-
+name: Windows Self Hosted
 on: [push, pull_request]
-
-Jobs:
-  Test:
-    runs-on: Windows
-
-    Strategy:
-      Matrix:
-        os: [windows-2019]
-
-   Steps:
+jobs:
+  test:
+    runs-on: windows
+    steps:
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
