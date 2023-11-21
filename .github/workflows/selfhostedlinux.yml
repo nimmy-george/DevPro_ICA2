@@ -1,4 +1,4 @@
-name: Linux Self Hosted
+name: Linux Self hosted
 on: [push, pull_request]
 jobs:
   test:
