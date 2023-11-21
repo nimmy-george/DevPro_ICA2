@@ -3,6 +3,9 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: windows
+    strategy:
+      matrix:
+        os: [windows-2019]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
