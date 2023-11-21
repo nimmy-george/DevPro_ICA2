@@ -1,4 +1,4 @@
-name: Linux-self-hosted
+name: Windows-self-hosted
 
 on: [push, pull_request]
 
