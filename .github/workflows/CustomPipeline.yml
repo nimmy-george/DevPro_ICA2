@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       my-docker-service:
-        image: docker.pkg.github.com/nimmy_george/devpro_ica2/dockerimage:latest
+        image: docker.pkg.github.com/nimmy_george/devpro_ica2/dockerimage:version
         ports:
           - 8080:8080  # Adjust based on your application's needs
 
