@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOCKER_REGISTRY: docker.pkg.github.com
-      DOCKER_USERNAME: nimmy_george
+      DOCKER_USERNAME: nimmy-george
       DOCKER_IMAGE: devpro_ica2/dockerimage
       DOCKER_TAG: version
 
