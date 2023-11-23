@@ -96,8 +96,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Log in to GitHub Packages
-        run: echo "${{ secrets.DOCKER_HUB }}" | docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_REGISTRY}"
+      - name: Configure Docker registry
+        run: |
+          echo "${{ secrets.DOCKER_REGISTRY_TOKEN }}" | docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_REGISTRY}"
 
 
       - name: Run Integration Tests
