@@ -87,19 +87,23 @@ jobs:
 
   DockerContainers:
     runs-on: ubuntu-latest
-    services:
-      my-docker-service:
-        image: docker.pkg.github.com/nimmy_george/devpro_ica2/dockerimage:version
-        ports:
-          - 8080:8080  # Adjust based on your application's needs
+    env:
+      DOCKER_REGISTRY: docker.pkg.github.com
+      DOCKER_USERNAME: nimmy_george
+      DOCKER_IMAGE: devpro_ica2/dockerimage
+      DOCKER_TAG: version
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Log in to GitHub Packages
+        run: echo "${{ secrets.DOCKER_HUB }}" | docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_REGISTRY}"
+
 
       - name: Run Integration Tests
         run: |
-          docker exec -it my-docker-service python -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee TestReportC.txt
+          docker pull "${DOCKER_REGISTRY}/${DOCKER_USERNAME}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+          docker run -it "${DOCKER_REGISTRY}/${DOCKER_USERNAME}/${DOCKER_IMAGE}:${DOCKER_TAG}" python -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee TestReportC.txt
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
