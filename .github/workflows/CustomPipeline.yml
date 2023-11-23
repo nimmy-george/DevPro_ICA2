@@ -99,6 +99,8 @@ jobs:
       - name: Configure Docker registry
         run: |
           echo "${{ secrets.DOCKER_REGISTRY_TOKEN }}" | docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_REGISTRY}"
+      - name: List Docker Images on GitHub Packages
+        run: docker search docker.pkg.github.com/nimmy_george/devpro_ica2/dockerimage
 
 
       - name: Run Integration Tests
