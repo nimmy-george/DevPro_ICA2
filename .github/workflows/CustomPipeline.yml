@@ -87,18 +87,23 @@ jobs:
 
   DockerContainers:
     runs-on: ubuntu-latest
+    services:
+      my-docker-service:
+        image: docker.pkg.github.com/nimmy_george/devpro_ica2/dockerimage:latest
+        ports:
+          - 8080:8080  # Adjust based on your application's needs
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Publish Docker image
+      - name: Run Integration Tests
         run: |
-          #docker build -t docker.pkg.github.com/insightiq/ica2/ica2_image:v1 .
-          #echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login docker.pkg.github.com -u insightiq --password-stdin
-          #docker push docker.pkg.github.com/insightiq/ica2/ica2_image:v1
-        env:
-          USERNAME: ${{ github.repository_owner }}
-          REPOSITORY: ${{ github.event.repository.name }}
-          IMAGE_NAME: ica2_image
-          TAG: v1
+          docker exec -it my-docker-service python -m unittest discover -s ./ -p 'test_app.py' 2>&1 | tee TestReportC.txt
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestReportc
+          path: TestReportC.txt  
 
